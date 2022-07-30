@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { faStar, faPlus } from '@fortawesome/free-solid-svg-icons';
+import * as moment from 'moment';
 
 import { AppServicesService } from './../../shared/service/app-services.service';
 
@@ -58,32 +59,32 @@ export class AssetCreateComponent implements OnInit {
 
   createForm() {
     this.myForm = this.fb.group({
-      type: ['', [Validators.required]],
-      owner: ['', [Validators.required]],
-      allotee: ['', [Validators.required]],
-      flatnumber: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      location: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      zipcode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^[0-9]*$/)]],
-      area: [''],
-      agreementperiod: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      agreementtime: ['', [Validators.required]],
-      lcd: ['', [Validators.required, /*Validators.pattern(/^(0?[1-9]|[12][0-9]|3[01])[\-](0?[1-9]|1[012])[\-]\d{4}$/)*/]],
-      rcd: ['', [Validators.required]],
-      red: ['', [Validators.required]],
-      lip: [''],
-      rad: [''],
-      amount: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      increaseat: ['10', [Validators.required, Validators.pattern(/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?)$/)]],
-      increaseon: ['1', [Validators.required, Validators.pattern(/^[1-9][0-9]?$|^99$/)]],
-      sda: [''],
-      sdd: [''],
-      remarks: [''],
-      pdd: ['5', [Validators.required]],
-      pattern: [''],
-      record: ['']
+      type:             ['', [Validators.required]],
+      owner:            ['', [Validators.required]],
+      allotee:          ['', [Validators.required]],
+      flatnumber:       ['', [Validators.required]],
+      address:          ['', [Validators.required]],
+      location:         ['', [Validators.required]],
+      state:            ['', [Validators.required]],
+      city:             ['', [Validators.required]],
+      zipcode:          ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^[0-9]*$/)]],
+      area:             [''],
+      agreementperiod:  ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      agreementtime:    ['', [Validators.required]],
+      lcd:              ['', [Validators.required, Validators.pattern(/^(0?[1-9]|[12][0-9]|3[01])[\-](0?[1-9]|1[012])[\-]\d{4}$/)]],
+      rcd:              ['', [Validators.required, Validators.pattern(/^(0?[1-9]|[12][0-9]|3[01])[\-](0?[1-9]|1[012])[\-]\d{4}$/)]],
+      red:              ['', [Validators.required, Validators.pattern(/^(0?[1-9]|[12][0-9]|3[01])[\-](0?[1-9]|1[012])[\-]\d{4}$/)]],
+      lip:              [''],
+      rad:              [''],
+      amount:           ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      increaseat:       ['10', [Validators.required, Validators.pattern(/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?)$/)]],
+      increaseon:       ['1', [Validators.required, Validators.pattern(/^[1-9][0-9]?$|^99$/)]],
+      sda:              [''],
+      sdd:              [''],
+      remarks:          [''],
+      pdd:              ['5', [Validators.required]],
+      pattern:          [''],
+      record:           ['']
     });
   }
 

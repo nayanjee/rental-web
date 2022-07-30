@@ -196,7 +196,7 @@
           <div class="position-relative mb-3 required">
             <label for="lcd" class="form-label">Lease Commencement Date</label>
             <input type="text" class="form-control" id="lcd" formControlName="lcd" placeholder="DD-MM-YYYY"
-              [ngClass]="{ 'is-invalid': submitted && f.lcd.errors }" mask="d0-M0-0000">
+              [ngClass]="{ 'is-invalid': submitted && f.lcd.errors }">
             <span class="text-danger" *ngIf="(f.lcd.touched || submitted) && f.lcd.errors?.required">
               This field is required.
             </span>
@@ -210,7 +210,7 @@
           <div class="position-relative mb-3 required">
             <label for="rcd" class="form-label">Rent Commencement Date</label>
             <input type="text" class="form-control" id="rcd" formControlName="rcd" placeholder="DD-MM-YYYY"
-              [ngClass]="{ 'is-invalid': submitted && f.rcd.errors }" mask="d0-M0-0000">
+              [ngClass]="{ 'is-invalid': submitted && f.rcd.errors }">
             <span class="text-danger" *ngIf="(f.rcd.touched || submitted) && f.rcd.errors?.required">
               This field is required.
             </span>
@@ -224,7 +224,7 @@
           <div class="position-relative mb-3 required">
             <label for="red" class="form-label">Agreement Expiry Date</label>
             <input type="text" class="form-control" id="red" formControlName="red" placeholder="DD-MM-YYYY"
-              [ngClass]="{ 'is-invalid': submitted && f.red.errors }" mask="d0-M0-0000">
+              [ngClass]="{ 'is-invalid': submitted && f.red.errors }">
             <span class="text-danger" *ngIf="(f.red.touched || submitted) && f.red.errors?.required">
               This field is required.
             </span>

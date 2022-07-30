@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { faStar, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import * as moment from 'moment';
 
 import { AppServicesService } from './../../shared/service/app-services.service';
 
@@ -90,32 +91,32 @@ export class AssetUpdateComponent implements OnInit {
 
   createForm() {
     this.myForm = this.fb.group({
-      type: ['', [Validators.required]],
-      owner: ['', [Validators.required]],
-      allotee: ['', [Validators.required]],
-      flatnumber: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      location: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      zipcode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^[0-9]*$/)]],
-      area: [''],
-      agreementperiod: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      agreementtime: ['', [Validators.required]],
-      lcd: ['', [Validators.required]],
-      rcd: ['', [Validators.required]],
-      red: ['', [Validators.required]],
-      lip: [''],
-      rad: [''],
-      amount: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      increaseat: ['10', [Validators.required, Validators.pattern(/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?)$/)]],
-      increaseon: ['1', [Validators.required, Validators.pattern(/^[1-9][0-9]?$|^99$/)]],
-      sda: [''],
-      sdd: [''],
-      remarks: [''],
-      pdd: ['5', [Validators.required]],
-      pattern: [''],
-      record: ['']
+      type:             ['', [Validators.required]],
+      owner:            ['', [Validators.required]],
+      allotee:          ['', [Validators.required]],
+      flatnumber:       ['', [Validators.required]],
+      address:          ['', [Validators.required]],
+      location:         ['', [Validators.required]],
+      state:            ['', [Validators.required]],
+      city:             ['', [Validators.required]],
+      zipcode:          ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^[0-9]*$/)]],
+      area:             [''],
+      agreementperiod:  ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      agreementtime:    ['', [Validators.required]],
+      lcd:              ['', [Validators.required]],
+      rcd:              ['', [Validators.required]],
+      red:              ['', [Validators.required, Validators.pattern(/^(0?[1-9]|[12][0-9]|3[01])[\-](0?[1-9]|1[012])[\-]\d{4}$/)]],
+      lip:              [''],
+      rad:              [''],
+      amount:           ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+      increaseat:       ['10', [Validators.required, Validators.pattern(/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?)$/)]],
+      increaseon:       ['1', [Validators.required, Validators.pattern(/^[1-9][0-9]?$|^99$/)]],
+      sda:              [''],
+      sdd:              [''],
+      remarks:          [''],
+      pdd:              ['5', [Validators.required]],
+      pattern:          [''],
+      record:           ['']
     });
   }
 
@@ -172,14 +173,14 @@ export class AssetUpdateComponent implements OnInit {
           this.myForm.controls['agreementtime'].setValue(response.data.agreementType, { onlySelf: true });
           this.myForm.value.agreementtime = response.data.agreementType;
 
-          this.myForm.controls['lcd'].setValue(response.data.leaseCommencementDate, { onlySelf: true });
-          this.myForm.value.lcd = response.data.leaseCommencementDate;
+          this.myForm.controls['lcd'].setValue(moment(response.data.leaseCommencementDate).format('DD-MM-YYYY'), { onlySelf: true });
+          this.myForm.value.lcd = moment(response.data.leaseCommencementDate).format('DD-MM-YYYY');
 
-          this.myForm.controls['rcd'].setValue(response.data.rentCommencementDate, { onlySelf: true });
-          this.myForm.value.rcd = response.data.rentCommencementDate;
+          this.myForm.controls['rcd'].setValue(moment(response.data.rentCommencementDate).format('DD-MM-YYYY'), { onlySelf: true });
+          this.myForm.value.rcd = moment(response.data.rentCommencementDate).format('DD-MM-YYYY');
 
-          this.myForm.controls['red'].setValue(response.data.agreementExpiryDate, { onlySelf: true });
-          this.myForm.value.red = response.data.agreementExpiryDate;
+          this.myForm.controls['red'].setValue(moment(response.data.agreementExpiryDate).format('DD-MM-YYYY'), { onlySelf: true });
+          this.myForm.value.red = moment(response.data.agreementExpiryDate).format('DD-MM-YYYY');
 
           this.myForm.controls['lip'].setValue(response.data.LockInPeriod, { onlySelf: true });
           this.myForm.value.lip = response.data.LockInPeriod;
@@ -300,19 +301,6 @@ export class AssetUpdateComponent implements OnInit {
       }
     }
 
-    /* if (this.myForm.value.rad != '') {
-      var pattern = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
-      if (pattern.test(this.myForm.value.rad)) {
-        $('#rad').removeClass('is-invalid');
-        $('#errrad').hide();
-      }else{
-        validationError = true;
-        $('#rad').addClass('is-invalid');
-        $('#errrad').text('Enter a valid date.');
-        $('#errrad').show();
-      }
-    } */
-
     if (this.myForm.value.sda != '') {
       var pattern = /^\d+$/;
       if (pattern.test(this.myForm.value.sda)) {
@@ -347,6 +335,15 @@ export class AssetUpdateComponent implements OnInit {
     }
 
     if (this.myForm.valid && !validationError) {
+      const lcd = (this.myForm.value.lcd).split('-').reverse().join('-');;
+      const leaseCommencementDate = moment(lcd).format('YYYY-MM-DD[T]00:00:00.000[Z]');
+
+      const rcd = (this.myForm.value.rcd).split('-').reverse().join('-');;
+      const rentCommencementDate = moment(rcd).format('YYYY-MM-DD[T]00:00:00.000[Z]');
+
+      const red = (this.myForm.value.red).split('-').reverse().join('-');;
+      const agreementExpiryDate = moment(red).format('YYYY-MM-DD[T]00:00:00.000[Z]');
+      
       const reqData = {
         assetId: this.assetId,
         propertyType: this.myForm.value.type,
@@ -361,9 +358,9 @@ export class AssetUpdateComponent implements OnInit {
         area: this.myForm.value.area,
         agreementPeriod: this.myForm.value.agreementperiod,
         agreementType: this.myForm.value.agreementtime,
-        leaseCommencementDate: this.myForm.value.lcd,
-        rentCommencementDate: this.myForm.value.rcd,
-        agreementExpiryDate: this.myForm.value.red,
+        leaseCommencementDate: leaseCommencementDate,
+        rentCommencementDate: rentCommencementDate,
+        agreementExpiryDate: agreementExpiryDate,
         LockInPeriod: this.myForm.value.lip,
         rentEscalationDate: this.myForm.value.rad,
         rentAmount: this.myForm.value.amount,
@@ -376,6 +373,7 @@ export class AssetUpdateComponent implements OnInit {
         paymentPattern: this.myForm.value.pattern,
         previousRecord: this.myForm.value.record
       }
+      console.log('----->', reqData);
       
       this.apiService.update('/api/asset/update', reqData).subscribe((response: any) => {
         if (response.status === 200) {

@@ -72,13 +72,13 @@
 
     <ngx-datatable-column name="Lease C. Date" prop="leaseCommencementDate" [width]="110">
       <ng-template let-row="row" ngx-datatable-cell-template>
-        {{row.leaseCommencementDate}}
+        {{row.leaseCommencementDate | date:'dd-MM-yyyy'}}
       </ng-template>
     </ngx-datatable-column>
 
     <ngx-datatable-column name="Expire On" prop="agreementExpiryDate" [width]="100">
       <ng-template let-row="row" ngx-datatable-cell-template>
-        {{row.agreementExpiryDate}}
+        {{row.agreementExpiryDate | date:'dd-MM-yyyy'}}
       </ng-template>
     </ngx-datatable-column>
 
@@ -142,15 +142,15 @@
 
       <div class="col-md-3 detail_popup_middle1" style="padding-right: 0px;">Lease Commencement Date</div>
       <div class="col-md-1 detail_popup_middle2">:</div>
-      <div class="col-md-8 detail_popup_middle3">{{temp2[0].leaseCommencementDate}}</div>
+      <div class="col-md-8 detail_popup_middle3">{{temp2[0].leaseCommencementDate | date:'dd-MM-yyyy'}}</div>
 
       <div class="col-md-3 detail_popup_middle1">Rent Commencement Date</div>
       <div class="col-md-1 detail_popup_middle2">:</div>
-      <div class="col-md-8 detail_popup_middle3">{{temp2[0].rentCommencementDate}}</div>
+      <div class="col-md-8 detail_popup_middle3">{{temp2[0].rentCommencementDate | date:'dd-MM-yyyy'}}</div>
 
       <div class="col-md-3 detail_popup_middle1">Agreement Expiry Date</div>
       <div class="col-md-1 detail_popup_middle2">:</div>
-      <div class="col-md-8 detail_popup_middle3">{{temp2[0].agreementExpiryDate}}</div>
+      <div class="col-md-8 detail_popup_middle3">{{temp2[0].agreementExpiryDate | date:'dd-MM-yyyy'}}</div>
 
       <div class="col-md-3 detail_popup_middle1">Lock in Period (in Month)</div>
       <div class="col-md-1 detail_popup_middle2">:</div>
@@ -186,11 +186,11 @@
 
       <div class="col-md-3 detail_popup_middle1">Payment Pattern</div>
       <div class="col-md-1 detail_popup_middle2">:</div>
-      <div class="col-md-8 detail_popup_middle3">{{temp2[0].paymentPattern}}</div>
+      <div class="col-md-8 detail_popup_middle3" style="white-space: pre-line;">{{temp2[0].paymentPattern}}</div>
 
       <div class="col-md-3 detail_popup_middle1">Previous Record</div>
       <div class="col-md-1 detail_popup_middle2">:</div>
-      <div class="col-md-8 detail_popup_middle3">{{temp2[0].previousRecord}}</div>
+      <div class="col-md-8 detail_popup_middle3" style="white-space: pre-line;">{{temp2[0].previousRecord}}</div>
 
       <div class="col-sm-3 detail_popup_middle1" style="background-color: #88b557;">Owner Name</div>
       <div class="col-md-1 detail_popup_middle2" style="background-color: #88b557;">:</div>
